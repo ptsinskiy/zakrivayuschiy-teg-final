@@ -20,8 +20,8 @@
     --mix-blend-color: var(--bg-color);
 
     --font-variation-regular: 400;
-    --font-variation-bold: 700;  
-}
+    --font-variation-bold: 700;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,6 +35,6 @@
     --mix-blend-color: var(--accent-color);
 
     --font-variation-regular: 465;
-    --font-variation-bold: 785; 
-}
+    --font-variation-bold: 785;
+  }
 }
