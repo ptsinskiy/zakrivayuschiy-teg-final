@@ -21,7 +21,7 @@
 
     --font-variation-regular: 400;
     --font-variation-bold: 700;  
-  }
+}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,5 +36,5 @@
 
     --font-variation-regular: 465;
     --font-variation-bold: 785; 
-  }
+}
 }
