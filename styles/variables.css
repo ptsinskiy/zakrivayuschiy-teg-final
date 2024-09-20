@@ -1,0 +1,40 @@
+/* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
+
+:root {
+  --sparks-color: #FF0000;
+  
+  --font-inter: 'Inter';
+  --font-accent: 'PressStart2P';
+}
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #fff;
+    --accent-color: #000;
+
+    --background-color: #d3d3d3;
+    --background-color-start: #e7e7e7;
+    --background-color-end: #1a1a1a;
+    --mix-blend-color: var(--bg-color);
+
+    --font-variation-regular: 400;
+    --font-variation-bold: 700;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #000;
+    --accent-color: #00CC14;
+ 
+    --background-color: var(--bg-color);
+    --background-color-start: #007f0c;
+    --background-color-end: #004306;
+    --mix-blend-color: var(--accent-color);
+
+    --font-variation-regular: 465;
+    --font-variation-bold: 785;
+  }
+}
