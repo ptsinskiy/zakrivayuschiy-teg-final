@@ -1,0 +1,435 @@
+/* Здесь вы напишете основную часть стилей страницы.
+
+Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ theme-dark — класс тёмной темы
+✦ theme-light — класс светлой темы
+✦ like-icon — для svg-иконки анимированного сердца
+✦ card__like-button — для кнопки Like рядом с иконкой
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
+✦ button__text — для обозначения текстового элемента внутри кнопки
+
+Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
+
+*/
+
+.page {
+  min-inline-size: 320px;
+  min-block-size: 100dvb;
+  font-family: var(--font-inter);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--background-color),
+    var(--background-color) 2px,
+    transparent 2px,
+    transparent 4px
+  ),
+  repeating-linear-gradient(
+    180deg,
+    var(--background-color-start),
+    var(--background-color-end) 2px,
+    transparent 2px,
+    transparent 4px
+  ),
+  repeating-linear-gradient(
+    180deg,
+    var(--background-color-start) 0.01%,
+    var(--background-color-end)
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  color: var(--accent-color, #000);
+}
+
+.content {
+  inline-size: min(100vi, 700px);
+  margin-inline: auto;
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  margin-block: 100px;
+  padding-block-start: 135px;
+  padding-block-end: 12px;
+  font-family: var(--font-accent, serif);
+  background-color: var(--bg-color, #fff);
+  border: 2px solid var(--accent-color);
+}
+
+.header__logo {
+  font-size: clamp(3.0625rem, 1.9087rem + 4.9231cqi, 4.0625rem);
+  font-weight: 400;
+  line-height: 65px;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.header__title {
+  font-size: clamp(0.875rem, 0.226rem + 2.7692cqi, 1.4375rem);
+  font-weight: 400;
+  line-height: 23px;
+  text-transform: uppercase;
+}
+
+.theme-menu__list {
+  padding-block-start: 5px;
+  padding-inline-start: 20px;
+}
+
+.theme-menu__button {
+  position: relative;
+  margin-block-end: 11px;
+  padding-inline: 0;
+  font-size: 14px;
+  background-color: transparent;
+  text-transform: uppercase;
+  border: none;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-menu__button::before {
+  content: '';
+  position: absolute;
+  inset-block: 15px;
+  block-size: 2px;
+  inline-size: 100%;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.theme-menu__button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.theme-menu__button:disabled::after {
+  content: '▶';
+  position: absolute;
+  inset-inline-start: -20px;
+  inset-block-start: 1px;
+  animation-name: pointer;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.theme-menu__button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.theme-menu__button:focus {
+  opacity: 0.6;
+  outline: none;
+}
+
+.theme-menu__button:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.cards {
+  display:flex;
+  gap: 50px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card__item {
+  font-size: 18px;
+  background-color: var(--bg-color);
+}
+
+.card__title {
+  padding-inline: 10px;
+  padding-block: 5px;
+  font-size: inherit;
+  font-variation-settings: 'wght' var(--font-variation-bold, 700);
+  border: 2px solid var(--accent-color);
+  border-block-end: none;
+}
+
+.wrap_card__image{
+  position: relative;
+  inline-size: min(100vi, 700px);
+  border: 2px solid var(--accent-color);
+  overflow: hidden;
+}
+
+.card__image {
+  display: block;
+  inline-size: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card__lable {
+  position: absolute;
+  right: 25px;
+  top: 25px;  
+
+  color: var(--accent-color);
+  font-family: var(--font-accent);
+  font-size: var(--font-accent);
+  line-height: normal;
+  z-index: 1;
+  opacity: 0.5;
+  mix-blend-mode: hard-light;
+
+  text-shadow: -1px 0 var(--bg-color), 0 1px var(--bg-color),
+    1px 0 var(--bg-color), 0 -1px var(--bg-color);
+}
+
+@supports ((text-stroke: 1px #000000) or (-webkit-text-stroke: 1px #000000)) {
+  .card__lable {
+    -webkit-text-stroke: 1px var(--bg-color);
+    text-stroke: 1px var(--bg-color);
+    text-shadow: none;
+  }
+}
+
+@media (width <= 375px) {
+  .card-label {
+    right: 10px;
+    top: 79px;
+  }
+}
+
+.card__content {
+  padding: 25px;
+  border: 2px solid var(--accent-color);
+  border-block-start: none;
+}
+
+.card__paragraph {
+  font-variation-settings: 'wght' var(--font-variation-regular, 400);
+}
+
+.card__paragraph:not(:last-of-type) {
+  margin-block-end: 27px;
+}
+
+.card__buttons {
+  display: flex;
+  justify-content: end;
+  column-gap: 4px;
+  margin-block-start: 25px;
+}
+
+.card__like-button {
+  inline-size: 130px;
+  block-size: 38px;
+  padding-block-end: 4px;
+}
+
+.card__icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid transparent;
+  padding: 0;
+  margin: 0;
+  block-size: 38px;
+  cursor: pointer;
+}
+
+.button {
+  color: var(--accent-color);
+  overflow: hidden;
+  font-family: var(--font-accent), sans-serif;
+  background: none;  
+  border: 2px solid var(--accent-color);
+  position: relative;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent-color);
+  size: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.button:hover::before {
+  transform: translateX(0);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--accent-color);
+}
+
+.button__text {
+  position: relative;
+  font-size: 14px;
+  line-height: 0.9;
+  mix-blend-mode: difference;
+  color: var(--mix-blend-color);
+  z-index: 1;
+  transition: color 1s ease;
+}
+
+.card__icon-button:focus-visible {
+  border-color: var(--accent-color);
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+.like-icon {
+  display: block;
+}
+
+.footer__floppy-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
+  margin: 50px auto 100px;
+  inline-size: 339px;
+  block-size: 55px;
+  padding: 16px 1px 15px 0;
+  background: var(--bg-color);
+}
+
+.floppy-icon {
+  position: relative;
+  z-index: 1;
+  display: block;
+  block-size: 21px;
+  inline-size: 21px;
+  margin-block-end: 1px;
+  transition: color 1s ease;
+}
+
+@media (width <= 375px) {
+  .header {
+    gap: 10px;
+    padding-block-start: 112px;
+    padding-block-end: 14px;
+  }
+
+  .header__logo {
+    font-size: min(calc(100vi / 7), 49px);
+  }
+
+  .footer__floppy-button {
+    flex-direction: column;
+    inline-size: 310px;
+    block-size: 84px;
+    gap: 8px;
+  }
+
+  .floppy-icon {
+    block-size: 28px;
+    inline-size: 28px;
+  }
+}
+
+.ok-button {
+  text-transform: uppercase;
+  width: 100%;
+  padding: 10px 0;
+  background: var(--bg-color);
+}
+
+.dialog {
+  font-family: var(--font-accent); 
+  font-size: 14px;
+  padding: 30px 26px;
+  color: var(--accent-color); 
+  background: var(--bg-color);
+  border: 2px solid var(--accent-color);
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.dialog:not([open]) {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dialog__container {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+@media (width <= 375px) {
+  .dialog__container {
+    gap: 28px;
+  }
+}
+
+.dialog__text {
+  text-transform: uppercase;
+  line-height: 1.5;
+  max-width: 234px;
+  width: 100%;
+}
+
+.dialog__text-container {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+@media (width <= 375px) {
+  .dialog__text {
+    width: 80%;
+  }
+}
+
+.dialog .floppy-icon {
+  width: 39px;
+  height: 39px;
+  mix-blend-mode: normal;
+}
+
+@media (width <= 375px) {
+  .dialog {
+    padding: 32px 38px;
+  }
+}
+
+.grayscale {
+  filter: grayscale(50%);
+}
+
+.hue-rotate {
+  filter: hue-rotate(30deg);
+}
+
+.saturate {
+  filter: saturate(360%);
+}
+
+.invert {
+  filter: invert(80%);
+}
+
+.sepia {
+  filter: sepia(80%);
+}
+
+.blur {
+  filter: blur(20px);
+}
+
+.multi-filter {
+  filter: saturate(250%) hue-rotate(90deg) grayscale(20%) invert(25%) blur(2px);
+}
